@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <title>Zolo Modz - PUBG Mobile Cheat</title>
+   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+   <style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+           -webkit-tap-highlight-color: transparent;
+       }
+
+       :root {
+           --neon-purple: #b026ff;
+           --neon-pink: #ff00ff;
+           --neon-cyan: #00ffff;
+           --neon-green: #39ff14;
+           --dark-bg: #0a0a0f;
+           --darker-bg: #050508;
+       }
+
+       body {
+           font-family: 'Rajdhani', sans-serif;
+           background: var(--dark-bg);
+           color: #fff;
+           overflow-x: hidden;
+           min-height: 100vh;
+           position: relative;
+       }
+
+       /* Animated Background */
+       .bg-container {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           z-index: -1;
+           background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+           overflow: hidden;
+       }
+
+       .nebula {
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           background: 
+               radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+               radial-gradient(circle at 40% 20%, rgba(0, 255, 255, 0.08) 0%, transparent 40%);
+           animation: nebulaMove 20s ease-in-out infinite;
+       }
+
+       @keyframes nebulaMove {
+           0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+           50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+       }
+
+       .stars {
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           background-image: 
+               radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+               radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+               radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+               radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.9), transparent),
+               radial-gradient(1px 1px at 230px 80px, #fff, transparent);
+           background-size: 200px 200px;
+           animation: twinkle 5s ease-in-out infinite;
+       }
+
+       @keyframes twinkle {
+           0%, 100% { opacity: 0.5; }
+           50% { opacity: 1; }
+       }
+
+       .grid-lines {
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           background-image: 
+               linear-gradient(rgba(176, 38, 255, 0.03) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(176, 38, 255, 0.03) 1px, transparent 1px);
+           background-size: 50px 50px;
+           transform: perspective(500px) rotateX(60deg);
+           transform-origin: center top;
+           animation: gridMove 15s linear infinite;
+       }
+
+       @keyframes gridMove {
+           0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+           100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+       }
+
+       /* Floating Particles - Falling from top to bottom */
+       .particles {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           pointer-events: none;
+           z-index: 1;
+       }
+
+       .particle {
+           position: absolute;
+           width: 4px;
+           height: 4px;
+           background: var(--neon-cyan);
+           border-radius: 50%;
+           box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+           animation: fall 15s infinite linear;
+           opacity: 0;
+       }
+
+       @keyframes fall {
+           0% {
+               transform: translateY(-10vh) translateX(0) scale(0);
+               opacity: 0;
+           }
+           10% { 
+               opacity: 1; 
+               transform: scale(1); 
+           }
+           90% { 
+               opacity: 1; 
+           }
+           100% {
+               transform: translateY(110vh) translateX(50px) scale(0);
+               opacity: 0;
+           }
+       }
+
+       /* Main Container */
+       .container {
+           position: relative;
+           z-index: 10;
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 20px;
+           min-height: 100vh;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+       }
+
+       /* Logo Section */
+       .logo-section {
+           text-align: center;
+           margin-bottom: 60px;
+           animation: fadeInDown 1s ease;
+       }
+
+       @keyframes fadeInDown {
+           from { opacity: 0; transform: translateY(-30px); }
+           to { opacity: 1; transform: translateY(0); }
+       }
+
+       .brand-name {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 4rem;
+           font-weight: 900;
+           background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan), var(--neon-purple));
+           background-size: 300% 100%;
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           animation: gradientText 3s linear infinite;
+           text-shadow: 0 0 30px rgba(176, 38, 255, 0.5);
+           letter-spacing: 8px;
+       }
+
+       @keyframes gradientText {
+           0% { background-position: 0% 50%; }
+           100% { background-position: 300% 50%; }
+       }
+
+       .tagline {
+           font-size: 1.3rem;
+           color: rgba(255, 255, 255, 0.6);
+           margin-top: 20px;
+           letter-spacing: 5px;
+           text-transform: uppercase;
+       }
+
+       /* Buttons Section */
+       .buttons-section {
+           width: 100%;
+           max-width: 600px;
+           display: flex;
+           flex-direction: column;
+           gap: 25px;
+           animation: fadeInUp 1s ease 0.3s both;
+       }
+
+       @keyframes fadeInUp {
+           from { opacity: 0; transform: translateY(30px); }
+           to { opacity: 1; transform: translateY(0); }
+       }
+
+       .neon-button {
+           position: relative;
+           padding: 25px 40px;
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.1rem;
+           font-weight: 700;
+           text-transform: uppercase;
+           letter-spacing: 3px;
+           color: #fff;
+           background: transparent;
+           border: 2px solid var(--neon-cyan);
+           border-radius: 50px;
+           cursor: pointer;
+           overflow: hidden;
+           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+           box-shadow: 
+               0 0 20px rgba(0, 255, 255, 0.3),
+               inset 0 0 20px rgba(0, 255, 255, 0.1);
+           text-decoration: none;
+           text-align: center;
+           display: block;
+       }
+
+       .neon-button::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: -100%;
+           width: 100%;
+           height: 100%;
+           background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+           transition: left 0.6s ease;
+       }
+
+       .neon-button:hover::before {
+           left: 100%;
+       }
+
+       .neon-button:hover {
+           transform: translateY(-3px);
+           box-shadow: 
+               0 10px 40px rgba(0, 255, 255, 0.4),
+               inset 0 0 30px rgba(0, 255, 255, 0.2);
+       }
+
+       .neon-button:active {
+           transform: translateY(-1px) scale(0.98);
+       }
+
+       .telegram-btn {
+           border-color: #0088cc;
+           box-shadow: 
+               0 0 20px rgba(0, 136, 204, 0.3),
+               inset 0 0 20px rgba(0, 136, 204, 0.1);
+       }
+
+       .telegram-btn:hover {
+           box-shadow: 
+               0 10px 40px rgba(0, 136, 204, 0.4),
+               inset 0 0 30px rgba(0, 136, 204, 0.2);
+       }
+
+       .trial-btn {
+           border-color: var(--neon-pink);
+           box-shadow: 
+               0 0 20px rgba(255, 0, 255, 0.3),
+               inset 0 0 20px rgba(255, 0, 255, 0.1);
+           font-size: 1rem;
+       }
+
+       .trial-btn:hover {
+           box-shadow: 
+               0 10px 40px rgba(255, 0, 255, 0.4),
+               inset 0 0 30px rgba(255, 0, 255, 0.2);
+       }
+
+       /* Help Button */
+       .help-btn {
+           position: fixed;
+           top: 20px;
+           right: 20px;
+           width: 50px;
+           height: 50px;
+           border-radius: 50%;
+           background: rgba(176, 38, 255, 0.1);
+           border: 2px solid var(--neon-purple);
+           color: var(--neon-purple);
+           font-size: 1.5rem;
+           cursor: pointer;
+           z-index: 50;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.3s ease;
+           box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+       }
+
+       .help-btn:hover {
+           background: var(--neon-purple);
+           color: #fff;
+           transform: scale(1.1);
+           box-shadow: 0 0 30px rgba(176, 38, 255, 0.6);
+       }
+
+       /* Info Modal */
+       .info-modal {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0, 0, 0, 0.8);
+           backdrop-filter: blur(10px);
+           z-index: 150;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           padding: 20px;
+           opacity: 0;
+           pointer-events: none;
+           transition: all 0.3s ease;
+       }
+
+       .info-modal.active {
+           opacity: 1;
+           pointer-events: all;
+       }
+
+       .info-content {
+           background: linear-gradient(135deg, rgba(26, 11, 26, 0.95), rgba(15, 15, 26, 0.95));
+           border: 2px solid var(--neon-purple);
+           border-radius: 20px;
+           padding: 30px;
+           max-width: 500px;
+           width: 100%;
+           position: relative;
+           box-shadow: 0 0 50px rgba(176, 38, 255, 0.3);
+           transform: scale(0.9);
+           transition: transform 0.3s ease;
+       }
+
+       .info-modal.active .info-content {
+           transform: scale(1);
+       }
+
+       .info-close {
+           position: absolute;
+           top: 15px;
+           right: 15px;
+           width: 30px;
+           height: 30px;
+           border-radius: 50%;
+           background: transparent;
+           border: 1px solid rgba(255, 255, 255, 0.3);
+           color: rgba(255, 255, 255, 0.6);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 1.2rem;
+           transition: all 0.3s ease;
+       }
+
+       .info-close:hover {
+           background: rgba(255, 0, 64, 0.2);
+           border-color: #ff0040;
+           color: #ff0040;
+       }
+
+       .info-title {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.5rem;
+           color: var(--neon-cyan);
+           margin-bottom: 20px;
+           padding-right: 40px;
+       }
+
+       .info-list {
+           list-style: none;
+           margin-bottom: 20px;
+       }
+
+       .info-list li {
+           padding: 10px 0;
+           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+           color: rgba(255, 255, 255, 0.8);
+           font-size: 0.95rem;
+           line-height: 1.5;
+       }
+
+       .info-list li:last-child {
+           border-bottom: none;
+       }
+
+       .info-list li strong {
+           color: var(--neon-green);
+       }
+
+       .info-version-box {
+           background: rgba(255, 255, 255, 0.05);
+           border-radius: 10px;
+           padding: 15px;
+           border-left: 3px solid var(--neon-green);
+       }
+
+       .info-version-title {
+           font-family: 'Orbitron', sans-serif;
+           color: var(--neon-cyan);
+           margin-bottom: 10px;
+           font-size: 1rem;
+       }
+
+       .info-version-text {
+           font-size: 0.9rem;
+           line-height: 1.6;
+           color: rgba(255, 255, 255, 0.7);
+       }
+
+       .info-version-text strong {
+           color: var(--neon-green);
+       }
+
+       /* Version Selection Screen */
+       .version-screen {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(10, 10, 15, 0.98);
+           backdrop-filter: blur(20px);
+           z-index: 100;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           padding: 20px;
+           opacity: 0;
+           pointer-events: none;
+           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+       .version-screen.active {
+           opacity: 1;
+           pointer-events: all;
+       }
+
+       .version-content {
+           max-width: 600px;
+           width: 100%;
+           text-align: center;
+           transform: scale(0.9);
+           transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+       .version-screen.active .version-content {
+           transform: scale(1);
+       }
+
+       .version-title {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 2rem;
+           margin-bottom: 10px;
+           background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+       }
+
+       .version-subtitle {
+           color: rgba(255, 255, 255, 0.6);
+           margin-bottom: 30px;
+           font-size: 1.1rem;
+       }
+
+       .version-buttons {
+           display: flex;
+           flex-direction: column;
+           gap: 15px;
+           margin-bottom: 30px;
+       }
+
+       .version-btn {
+           position: relative;
+           padding: 25px 30px;
+           background: rgba(255, 255, 255, 0.03);
+           border: 2px solid var(--neon-green);
+           border-radius: 15px;
+           cursor: pointer;
+           transition: all 0.4s ease;
+           text-align: left;
+           overflow: hidden;
+       }
+
+       .version-btn::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: linear-gradient(90deg, rgba(57, 255, 20, 0.1), transparent);
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+
+       .version-btn:hover::before {
+           opacity: 1;
+       }
+
+       .version-btn:hover {
+           transform: translateX(10px);
+           border-color: var(--neon-cyan);
+           box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+       }
+
+       .version-label {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.3rem;
+           font-weight: 700;
+           color: #fff;
+           display: block;
+           margin-bottom: 5px;
+       }
+
+       .version-desc {
+           font-size: 0.9rem;
+           color: rgba(255, 255, 255, 0.6);
+           line-height: 1.4;
+       }
+
+       .back-btn {
+           margin-top: 30px;
+           padding: 12px 30px;
+           background: transparent;
+           border: 1px solid rgba(255, 255, 255, 0.3);
+           color: rgba(255, 255, 255, 0.6);
+           border-radius: 25px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           font-family: 'Rajdhani', sans-serif;
+           font-size: 1rem;
+           letter-spacing: 2px;
+       }
+
+       .back-btn:hover {
+           border-color: #fff;
+           color: #fff;
+           background: rgba(255, 255, 255, 0.1);
+       }
+
+       /* Download Screen */
+       .download-screen {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(10, 10, 15, 0.98);
+           backdrop-filter: blur(20px);
+           z-index: 101;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           padding: 20px;
+           opacity: 0;
+           pointer-events: none;
+           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+       .download-screen.active {
+           opacity: 1;
+           pointer-events: all;
+       }
+
+       .download-content {
+           text-align: center;
+           max-width: 500px;
+       }
+
+       .download-icon {
+           width: 80px;
+           height: 80px;
+           margin: 0 auto 30px;
+           border: 3px solid var(--neon-cyan);
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           animation: downloadPulse 2s ease-in-out infinite;
+       }
+
+       @keyframes downloadPulse {
+           0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); transform: scale(1); }
+           50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); transform: scale(1.05); }
+       }
+
+       .download-arrow {
+           width: 0;
+           height: 0;
+           border-left: 15px solid transparent;
+           border-right: 15px solid transparent;
+           border-top: 25px solid var(--neon-cyan);
+           animation: arrowBounce 1s ease-in-out infinite;
+       }
+
+       @keyframes arrowBounce {
+           0%, 100% { transform: translateY(0); }
+           50% { transform: translateY(10px); }
+       }
+
+       .download-title {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.8rem;
+           margin-bottom: 15px;
+           color: #fff;
+       }
+
+       .download-text {
+           color: rgba(255, 255, 255, 0.7);
+           margin-bottom: 30px;
+           font-size: 1.1rem;
+           line-height: 1.6;
+       }
+
+       .download-btn-final {
+           display: inline-block;
+           padding: 18px 40px;
+           background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+           border: none;
+           border-radius: 50px;
+           color: #fff;
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.1rem;
+           font-weight: 700;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           cursor: pointer;
+           transition: all 0.4s ease;
+           box-shadow: 0 0 30px rgba(176, 38, 255, 0.4);
+           text-decoration: none;
+       }
+
+       .download-btn-final:hover {
+           transform: translateY(-3px);
+           box-shadow: 0 10px 40px rgba(176, 38, 255, 0.6);
+       }
+
+       /* Responsive */
+       @media (max-width: 768px) {
+           .brand-name { font-size: 2.8rem; letter-spacing: 4px; }
+           .tagline { font-size: 1rem; }
+           .neon-button { font-size: 0.9rem; padding: 22px 30px; }
+           .version-title { font-size: 1.5rem; }
+           .help-btn { width: 40px; height: 40px; font-size: 1.2rem; top: 15px; right: 15px; }
+           .info-content { padding: 20px; }
+           .info-title { font-size: 1.2rem; }
+       }
+
+       /* Smooth scroll behavior */
+       html {
+           scroll-behavior: smooth;
+       }
+
+       /* Loading animation for buttons */
+       .loading {
+           position: relative;
+           pointer-events: none;
+       }
+
+       .loading::after {
+           content: '';
+           position: absolute;
+           width: 20px;
+           height: 20px;
+           top: 50%;
+           right: 20px;
+           transform: translateY(-50%);
+           border: 2px solid transparent;
+           border-top-color: #fff;
+           border-radius: 50%;
+           animation: spin 1s linear infinite;
+       }
+
+       @keyframes spin {
+           to { transform: translateY(-50%) rotate(360deg); }
+       }
+   </style>
+</head>
+<body>
+   <!-- Background -->
+   <div class="bg-container">
+       <div class="nebula"></div>
+       <div class="stars"></div>
+       <div class="grid-lines"></div>
+   </div>
+   <div class="particles" id="particles"></div>
+
+   <!-- Help Button -->
+   <button class="help-btn" onclick="showInfoModal()">?</button>
+
+   <!-- Info Modal -->
+   <div class="info-modal" id="infoModal">
+       <div class="info-content">
+           <button class="info-close" onclick="hideInfoModal()">×</button>
+           <h3 class="info-title">Информация об обновлении</h3>
+           <ul class="info-list">
+               <li><strong>Обновлено:</strong> 09.02.2026</li>
+               <li><strong>Актуальность:</strong> Active</li>
+               <li>Исправлены ошибки сервера</li>
+               <li>Теперь на сайт можно заходить без VPN</li>
+               <li>Исправлен загрузчик чита</li>
+               <li>Улучшена система безопасности (Anti-ban)</li>
+           </ul>
+           <div class="info-version-box">
+               <div class="info-version-title">Информация о версиях:</div>
+               <div class="info-version-text">
+                   <strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) и выше через Jetpack библиотеку. Это современная версия. <span style="color: var(--neon-green);">(Рекомендуется)</span>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- Main Page -->
+   <div class="container" id="mainPage">
+       <!-- Logo Text Only -->
+       <div class="logo-section">
+           <h1 class="brand-name">ZOLO MODZ</h1>
+           <p class="tagline">Premium PUBG Mobile Modifications</p>
+       </div>
+
+       <!-- Buttons -->
+       <div class="buttons-section">
+           <a href="https://t.me/zolothebestmodz" target="_blank" class="neon-button telegram-btn">
+               Перейти в Telegram канал
+           </a>
+           <button class="neon-button trial-btn" onclick="showVersionScreen()">
+               Попробовать пробную версию на 30 дней
+           </button>
+       </div>
+   </div>
+
+   <!-- Version Selection Screen -->
+   <div class="version-screen" id="versionScreen">
+       <div class="version-content">
+           <h2 class="version-title">Выберите версию</h2>
+           <p class="version-subtitle">Версия для слабых устройств</p>
+           
+           <div class="version-buttons">
+               <button class="version-btn v3" onclick="startDownload()">
+                   <span class="version-label">Скачать V3 Версию</span>
+                   <span class="version-desc">Рекомендуется • Современная • Android 4.0+</span>
+               </button>
+           </div>
+
+           <button class="back-btn" onclick="hideVersionScreen()">← Назад</button>
+       </div>
+   </div>
+
+   <!-- Download Screen -->
+   <div class="download-screen" id="downloadScreen">
+       <div class="download-content">
+           <div class="download-icon">
+               <div class="download-arrow"></div>
+           </div>
+           <h2 class="download-title">Начинаем скачивание...</h2>
+           <p class="download-text">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
+           <a href="https://github.com/ZoloCheatOffical/Zolo-modz/raw/main/Pubg%20ZoloCheat-GL-4.2-V5%20(Last%20D).apk" class="download-btn-final" id="finalDownloadBtn" download="Pubg ZoloCheat-GL-4.2-V5 (Last D).apk">Скачать файл</a>
+       </div>
+   </div>
+
+   <script>
+       // Create falling particles (top to bottom)
+       function createParticles() {
+           const container = document.getElementById('particles');
+           const colors = ['#00ffff', '#ff00ff', '#39ff14', '#b026ff'];
+           
+           for (let i = 0; i < 40; i++) {
+               const particle = document.createElement('div');
+               particle.className = 'particle';
+               particle.style.left = Math.random() * 100 + '%';
+               particle.style.animationDelay = Math.random() * 15 + 's';
+               particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+               particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+               particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+               container.appendChild(particle);
+           }
+       }
+
+       // Show info modal
+       function showInfoModal() {
+           document.getElementById('infoModal').classList.add('active');
+       }
+
+       // Hide info modal
+       function hideInfoModal() {
+           document.getElementById('infoModal').classList.remove('active');
+       }
+
+       // Show version selection screen
+       function showVersionScreen() {
+           document.getElementById('versionScreen').classList.add('active');
+           document.body.style.overflow = 'hidden';
+       }
+
+       // Hide version screen
+       function hideVersionScreen() {
+           document.getElementById('versionScreen').classList.remove('active');
+           document.body.style.overflow = '';
+       }
+
+       // Start download process
+       function startDownload() {
+           const downloadScreen = document.getElementById('downloadScreen');
+           
+           // Hide version screen and show download screen
+           document.getElementById('versionScreen').classList.remove('active');
+           
+           setTimeout(() => {
+               downloadScreen.classList.add('active');
+               
+               // Auto start download
+               setTimeout(() => {
+                   document.getElementById('finalDownloadBtn').click();
+               }, 1000);
+           }, 300);
+       }
+
+       // Close download screen when clicking outside
+       document.getElementById('downloadScreen').addEventListener('click', function(e) {
+           if (e.target === this) {
+               this.classList.remove('active');
+               document.body.style.overflow = '';
+           }
+       });
+
+       // Close info modal when clicking outside
+       document.getElementById('infoModal').addEventListener('click', function(e) {
+           if (e.target === this) {
+               hideInfoModal();
+           }
+       });
+
+       // Initialize
+       createParticles();
+
+       // Add smooth transitions for all buttons
+       document.querySelectorAll('button, a').forEach(btn => {
+           btn.addEventListener('click', function(e) {
+               if (this.classList.contains('loading')) return;
+               
+               // Add ripple effect
+               const ripple = document.createElement('span');
+               ripple.style.cssText = `
+                   position: absolute;
+                   background: rgba(255,255,255,0.3);
+                   border-radius: 50%;
+                   transform: scale(0);
+                   animation: ripple 0.6s linear;
+                   pointer-events: none;
+               `;
+               this.style.position = 'relative';
+               this.style.overflow = 'hidden';
+               this.appendChild(ripple);
+               
+               setTimeout(() => ripple.remove(), 600);
+           });
+       });
+
+       // Add ripple animation
+       const style = document.createElement('style');
+       style.textContent = `
+           @keyframes ripple {
+               to {
+                   transform: scale(4);
+                   opacity: 0;
+               }
+           }
+       `;
+       document.head.appendChild(style);
+   </script>
+</body>
+</html>
