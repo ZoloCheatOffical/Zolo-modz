@@ -470,6 +470,137 @@
                inset 0 0 30px rgba(255, 0, 255, 0.2);
        }
 
+       /* Guide Button */
+       .guide-btn {
+           margin-top: 20px;
+           padding: 15px 30px;
+           background: rgba(255, 102, 0, 0.1);
+           border: 2px solid var(--neon-orange);
+           border-radius: 25px;
+           color: var(--neon-orange);
+           font-family: 'Orbitron', sans-serif;
+           font-size: 0.9rem;
+           font-weight: 700;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: 10px;
+           width: 100%;
+           max-width: 200px;
+           margin-left: auto;
+           margin-right: auto;
+       }
+
+       .guide-btn:hover {
+           background: rgba(255, 102, 0, 0.2);
+           transform: translateY(-2px);
+           box-shadow: 0 0 30px rgba(255, 102, 0, 0.4);
+       }
+
+       .guide-icon {
+           font-size: 1.2rem;
+       }
+
+       /* Video Modal - Shorts format 9:16 */
+       .video-modal {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100vw;
+           height: 100vh;
+           background: rgba(0, 0, 0, 0.95);
+           backdrop-filter: blur(20px);
+           z-index: 300;
+           display: none;
+           align-items: center;
+           justify-content: center;
+           padding: 20px;
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+
+       .video-modal.active {
+           display: flex;
+           opacity: 1;
+       }
+
+       .video-content {
+           background: linear-gradient(135deg, rgba(26, 11, 26, 0.98), rgba(15, 15, 26, 0.98));
+           border: 2px solid var(--neon-orange);
+           border-radius: 20px;
+           padding: 20px;
+           max-width: 450px;
+           width: 100%;
+           max-height: 90vh;
+           position: relative;
+           box-shadow: 0 0 50px rgba(255, 102, 0, 0.3);
+           transform: scale(0.9);
+           transition: transform 0.3s ease;
+           display: flex;
+           flex-direction: column;
+       }
+
+       .video-modal.active .video-content {
+           transform: scale(1);
+       }
+
+       .video-close {
+           position: absolute;
+           top: 10px;
+           right: 10px;
+           width: 40px;
+           height: 40px;
+           border-radius: 50%;
+           background: rgba(255, 0, 64, 0.2);
+           border: 2px solid var(--neon-red);
+           color: var(--neon-red);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 1.5rem;
+           transition: all 0.3s ease;
+           z-index: 10;
+       }
+
+       .video-close:hover {
+           background: rgba(255, 0, 64, 0.4);
+           transform: rotate(90deg);
+       }
+
+       .video-title {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.2rem;
+           color: var(--neon-orange);
+           margin-bottom: 15px;
+           text-align: center;
+           text-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+       }
+
+       .video-container {
+           position: relative;
+           padding-bottom: 177.77%; /* 9:16 aspect ratio for shorts */
+           height: 0;
+           overflow: hidden;
+           border-radius: 15px;
+           border: 2px solid rgba(255, 102, 0, 0.3);
+           box-shadow: 0 0 30px rgba(255, 102, 0, 0.2);
+       }
+
+       .video-container iframe {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           border: none;
+           border-radius: 15px;
+       }
+
        /* Help Button Wrapper */
        .help-wrapper {
            position: fixed;
@@ -692,6 +823,7 @@
            padding: 20px;
            opacity: 0;
            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+           overflow-y: auto;
        }
 
        .version-screen.active {
@@ -1053,6 +1185,20 @@
            .lang-btn { padding: 8px 12px; font-size: 0.8rem; }
            .lang-flag { width: 20px; height: 14px; }
            .lang-loading-text { font-size: 1.4rem; }
+           
+           .video-content { 
+               max-width: 350px; 
+               padding: 15px;
+           }
+           .video-title { font-size: 1rem; }
+           .video-close { width: 35px; height: 35px; font-size: 1.2rem; }
+       }
+
+       @media (max-width: 480px) {
+           .video-content {
+               max-width: 95vw;
+               max-height: 80vh;
+           }
        }
 
        .info-content::-webkit-scrollbar {
@@ -1144,6 +1290,25 @@
        </div>
    </div>
 
+   <!-- Video Guide Modal -->
+   <div class="video-modal" id="videoModal">
+       <div class="video-content">
+           <button class="video-close" id="videoClose">×</button>
+           <h3 class="video-title" id="videoTitle">📹 ГАЙД: Как установить</h3>
+           <div class="video-container">
+               <!-- RUTUBE SHORTS - приватное видео -->
+               <iframe src="https://rutube.ru/play/embed/07e8dc89abfac902c36e3a5f186c676f?p=JoV75Frl99cKPrk18QbMow" 
+                       allowfullscreen 
+                       frameborder="0"
+                       allow="clipboard-write; autoplay; encrypted-media; picture-in-picture; web-share"
+                       webkitAllowFullScreen 
+                       mozallowfullscreen
+                       referrerpolicy="no-referrer-when-downgrade">
+               </iframe>
+           </div>
+       </div>
+   </div>
+
    <!-- Help Button Wrapper -->
    <div class="help-wrapper">
        <button class="help-btn" id="helpBtn">?</button>
@@ -1217,6 +1382,12 @@
                </button>
            </div>
 
+           <!-- КНОПКА ГАЙДА -->
+           <button class="guide-btn" id="guideBtn">
+               <span class="guide-icon">📹</span>
+               <span id="guideText">ГАЙД</span>
+           </button>
+
            <button class="back-btn" id="versionBackBtn">← Назад</button>
        </div>
    </div>
@@ -1280,6 +1451,7 @@
                v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) до Android 10 (API 29). Устарела. (Если у вас старая версия Android) <span style='color: var(--neon-orange);'>(Устаревшая)</span>",
                v2DownloadTitle1: "Не работает версия V3?",
                v2DownloadTitle2: "Возможно у вас старая версия Android, можете попробовать скачать Версию V2",
+               v2DownloadBtn: "СКАЧАТЬ",
                tagline: "Premium PUBG Mobile Modifications",
                telegramBtn: "Перейти в Telegram канал",
                trialBtn: "Попробовать пробную версию на 30 дней",
@@ -1298,7 +1470,9 @@
                downloadBtnV3: "Скачать файл",
                downloadTitleV2: "Начинаем скачивание V2...",
                downloadTextV2: "Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже",
-               downloadBtnV2: "Скачать файл V2"
+               downloadBtnV2: "Скачать файл V2",
+               guideBtn: "ГАЙД",
+               videoTitle: "📹 ГАЙД: Как установить"
            },
            en: {
                loadingText: "Please wait...",
@@ -1317,6 +1491,7 @@
                v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) to Android 10 (API 29). Legacy version. (If you have an old Android version) <span style='color: var(--neon-orange);'>(Legacy)</span>",
                v2DownloadTitle1: "V3 version not working?",
                v2DownloadTitle2: "You may have an old Android version, try downloading V2 Version",
+               v2DownloadBtn: "DOWNLOAD",
                tagline: "Premium PUBG Mobile Modifications",
                telegramBtn: "Go to Telegram Channel",
                trialBtn: "Try trial version for 30 days",
@@ -1335,7 +1510,9 @@
                downloadBtnV3: "Download file",
                downloadTitleV2: "Starting V2 download...",
                downloadTextV2: "If download doesn't start automatically,<br>click the button below",
-               downloadBtnV2: "Download V2 file"
+               downloadBtnV2: "Download V2 file",
+               guideBtn: "GUIDE",
+               videoTitle: "📹 GUIDE: How to install"
            },
            ara: {
                loadingText: "يرجى الانتظار...",
@@ -1354,6 +1531,7 @@
                v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) إلى Android 10 (API 29). إصدار قديم. (إذا كان لديك إصدار Android قديم) <span style='color: var(--neon-orange);'>(قديم)</span>",
                v2DownloadTitle1: "الإصدار V3 لا يعمل؟",
                v2DownloadTitle2: "ربما لديك إصدار Android قديم، جرب تحميل الإصدار V2",
+               v2DownloadBtn: "تحميل",
                tagline: "تعديلات PUBG Mobile المتميزة",
                telegramBtn: "الانتقال إلى قناة Telegram",
                trialBtn: "جرب النسخة التجريبية لمدة 30 يومًا",
@@ -1372,7 +1550,9 @@
                downloadBtnV3: "تحميل الملف",
                downloadTitleV2: "جاري بدء تحميل V2...",
                downloadTextV2: "إذا لم يبدأ التحميل تلقائيًا،<br>اضغط الزر أدناه",
-               downloadBtnV2: "تحميل ملف V2"
+               downloadBtnV2: "تحميل ملف V2",
+               guideBtn: "دليل",
+               videoTitle: "📹 دليل: كيفية التثبيت"
            },
            zh: {
                loadingText: "请稍候...",
@@ -1391,6 +1571,7 @@
                v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) 到 Android 10 (API 29)。旧版本。（如果您的 Android 版本较旧）<span style='color: var(--neon-orange);'>（旧版）</span>",
                v2DownloadTitle1: "V3 版本无法运行？",
                v2DownloadTitle2: "您可能使用的是旧版 Android，请尝试下载 V2 版本",
+               v2DownloadBtn: "下载",
                tagline: "高级 PUBG Mobile 修改",
                telegramBtn: "前往 Telegram 频道",
                trialBtn: "试用30天",
@@ -1409,7 +1590,9 @@
                downloadBtnV3: "下载文件",
                downloadTitleV2: "开始下载 V2...",
                downloadTextV2: "如果下载没有自动开始，<br>请点击下方按钮",
-               downloadBtnV2: "下载 V2 文件"
+               downloadBtnV2: "下载 V2 文件",
+               guideBtn: "指南",
+               videoTitle: "📹 指南：如何安装"
            },
            es: {
                loadingText: "Por favor espere...",
@@ -1428,6 +1611,7 @@
                v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) hasta Android 10 (API 29). Versión obsoleta. (Si tienes una versión antigua de Android) <span style='color: var(--neon-orange);'>(Obsoleto)</span>",
                v2DownloadTitle1: "¿La versión V3 no funciona?",
                v2DownloadTitle2: "Es posible que tengas una versión antigua de Android, prueba descargar la Versión V2",
+               v2DownloadBtn: "DESCARGAR",
                tagline: "Modificaciones Premium de PUBG Mobile",
                telegramBtn: "Ir al canal de Telegram",
                trialBtn: "Probar versión de prueba por 30 días",
@@ -1446,7 +1630,9 @@
                downloadBtnV3: "Descargar archivo",
                downloadTitleV2: "Iniciando descarga V2...",
                downloadTextV2: "Si la descarga no comienza automáticamente,<br>haz clic en el botón de abajo",
-               downloadBtnV2: "Descargar archivo V2"
+               downloadBtnV2: "Descargar archivo V2",
+               guideBtn: "GUÍA",
+               videoTitle: "📹 GUÍA: Cómo instalar"
            }
        };
 
@@ -1557,6 +1743,7 @@
            document.getElementById('v2Text').innerHTML = t.v2Text;
            document.getElementById('v2DownloadTitle1').textContent = t.v2DownloadTitle1;
            document.getElementById('v2DownloadTitle2').textContent = t.v2DownloadTitle2;
+           document.getElementById('v2DownloadLink').textContent = t.v2DownloadBtn;
 
            // Update main page
            document.getElementById('tagline').textContent = t.tagline;
@@ -1569,6 +1756,7 @@
            document.getElementById('v3BtnLabel').textContent = t.v3BtnLabel;
            document.getElementById('v3BtnDesc').textContent = t.v3BtnDesc;
            document.getElementById('versionBackBtn').textContent = t.backBtn;
+           document.getElementById('guideText').textContent = t.guideBtn;
 
            // Update V2 screen
            document.getElementById('v2ScreenTitle').textContent = t.v2ScreenTitle;
@@ -1585,6 +1773,9 @@
            document.getElementById('downloadTitleV2').textContent = t.downloadTitleV2;
            document.getElementById('downloadTextV2').innerHTML = t.downloadTextV2;
            document.getElementById('finalDownloadBtnV2').textContent = t.downloadBtnV2;
+
+           // Update video modal
+           document.getElementById('videoTitle').textContent = t.videoTitle;
 
            // Update HTML lang attribute
            document.documentElement.lang = lang === 'ara' ? 'ar' : lang === 'zh' ? 'zh' : lang === 'es' ? 'es' : lang === 'ru' ? 'ru' : 'en';
@@ -1665,6 +1856,31 @@
            }, 300);
        }
 
+       // Show video modal
+       function showVideoModal() {
+           const modal = document.getElementById('videoModal');
+           modal.style.display = 'flex';
+           void modal.offsetWidth;
+           modal.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       }
+
+       // Hide video modal
+       function hideVideoModal() {
+           const modal = document.getElementById('videoModal');
+           modal.classList.remove('active');
+           setTimeout(() => {
+               modal.style.display = 'none';
+               // Stop video if playing
+               const iframe = modal.querySelector('iframe');
+               if (iframe) {
+                   const src = iframe.src;
+                   iframe.src = src;
+               }
+               document.body.style.overflow = '';
+           }, 300);
+       }
+
        // Event Listeners
        document.addEventListener('DOMContentLoaded', function() {
            // Language button
@@ -1703,6 +1919,12 @@
            // V3 download button
            document.getElementById('v3Btn').addEventListener('click', startDownloadV3);
 
+           // Guide button
+           document.getElementById('guideBtn').addEventListener('click', showVideoModal);
+
+           // Video modal close
+           document.getElementById('videoClose').addEventListener('click', hideVideoModal);
+
            // V2 screen back button
            document.getElementById('v2BackBtn').addEventListener('click', hideV2Screen);
 
@@ -1730,10 +1952,15 @@
                if (e.target === this) this.classList.remove('active');
            });
 
+           document.getElementById('videoModal').addEventListener('click', function(e) {
+               if (e.target === this) hideVideoModal();
+           });
+
            // Escape key
            document.addEventListener('keydown', function(e) {
                if (e.key === 'Escape') {
                    hideInfoModal();
+                   hideVideoModal();
                    document.getElementById('versionScreen').classList.remove('active');
                    document.getElementById('v2VersionScreen').classList.remove('active');
                    document.getElementById('downloadScreenV3').classList.remove('active');
