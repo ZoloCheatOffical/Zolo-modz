@@ -18,6 +18,8 @@
            --neon-pink: #ff00ff;
            --neon-cyan: #00ffff;
            --neon-green: #39ff14;
+           --neon-orange: #ff6600;
+           --neon-red: #ff0040;
            --dark-bg: #0a0a0f;
            --darker-bg: #050508;
        }
@@ -317,7 +319,7 @@
            box-shadow: 0 0 30px rgba(176, 38, 255, 0.6);
        }
 
-       /* Info Modal - Исправлено позиционирование */
+       /* Info Modal */
        .info-modal {
            position: fixed;
            top: 0;
@@ -327,19 +329,18 @@
            background: rgba(0, 0, 0, 0.8);
            backdrop-filter: blur(10px);
            z-index: 150;
-           display: flex;
+           display: none;
            align-items: center;
            justify-content: center;
            padding: 20px;
            opacity: 0;
-           pointer-events: none;
-           transition: all 0.3s ease;
+           transition: opacity 0.3s ease;
            overflow-y: auto;
        }
 
        .info-modal.active {
+           display: flex;
            opacity: 1;
-           pointer-events: all;
        }
 
        .info-content {
@@ -362,31 +363,34 @@
            transform: scale(1);
        }
 
-       /* Крестик закрытия - фиксированное позиционирование относительно модалки */
        .info-close {
            position: absolute;
            top: 15px;
            right: 15px;
-           width: 30px;
-           height: 30px;
+           width: 36px;
+           height: 36px;
            border-radius: 50%;
-           background: transparent;
-           border: 1px solid rgba(255, 255, 255, 0.3);
-           color: rgba(255, 255, 255, 0.6);
+           background: rgba(255, 255, 255, 0.1);
+           border: 2px solid rgba(255, 255, 255, 0.3);
+           color: rgba(255, 255, 255, 0.8);
            cursor: pointer;
            display: flex;
            align-items: center;
            justify-content: center;
-           font-size: 1.2rem;
+           font-size: 1.4rem;
+           line-height: 1;
            transition: all 0.3s ease;
-           z-index: 10;
+           z-index: 100;
            flex-shrink: 0;
+           padding: 0;
+           margin: 0;
        }
 
        .info-close:hover {
-           background: rgba(255, 0, 64, 0.2);
+           background: rgba(255, 0, 64, 0.3);
            border-color: #ff0040;
            color: #ff0040;
+           transform: rotate(90deg);
        }
 
        .info-title {
@@ -394,7 +398,8 @@
            font-size: 1.5rem;
            color: var(--neon-cyan);
            margin-bottom: 20px;
-           padding-right: 40px;
+           padding-right: 50px;
+           line-height: 1.2;
        }
 
        .info-list {
@@ -423,6 +428,11 @@
            border-radius: 10px;
            padding: 15px;
            border-left: 3px solid var(--neon-green);
+           margin-bottom: 15px;
+       }
+
+       .info-version-box.v2-box {
+           border-left-color: var(--neon-orange);
        }
 
        .info-version-title {
@@ -430,6 +440,10 @@
            color: var(--neon-cyan);
            margin-bottom: 10px;
            font-size: 1rem;
+       }
+
+       .info-version-box.v2-box .info-version-title {
+           color: var(--neon-orange);
        }
 
        .info-version-text {
@@ -440,6 +454,41 @@
 
        .info-version-text strong {
            color: var(--neon-green);
+       }
+
+       .info-version-box.v2-box .info-version-text strong {
+           color: var(--neon-orange);
+       }
+
+       .v2-download-section {
+           margin-top: 20px;
+           padding-top: 20px;
+           border-top: 1px solid rgba(255, 255, 255, 0.1);
+       }
+
+       .v2-download-title {
+           font-family: 'Rajdhani', sans-serif;
+           font-size: 1rem;
+           color: rgba(255, 255, 255, 0.8);
+           margin-bottom: 10px;
+       }
+
+       .v2-download-link {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.2rem;
+           color: var(--neon-red);
+           text-decoration: none;
+           font-weight: 700;
+           letter-spacing: 2px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           display: inline-block;
+           text-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
+       }
+
+       .v2-download-link:hover {
+           transform: scale(1.1);
+           text-shadow: 0 0 20px rgba(255, 0, 64, 0.8);
        }
 
        /* Version Selection Screen */
@@ -535,6 +584,19 @@
            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
        }
 
+       .version-btn.v2-btn {
+           border-color: var(--neon-orange);
+       }
+
+       .version-btn.v2-btn::before {
+           background: linear-gradient(90deg, rgba(255, 102, 0, 0.1), transparent);
+       }
+
+       .version-btn.v2-btn:hover {
+           border-color: #ff8533;
+           box-shadow: 0 0 30px rgba(255, 102, 0, 0.3);
+       }
+
        .version-label {
            font-family: 'Orbitron', sans-serif;
            font-size: 1.3rem;
@@ -612,9 +674,19 @@
            animation: downloadPulse 2s ease-in-out infinite;
        }
 
+       .download-icon.orange {
+           border-color: var(--neon-orange);
+           animation: downloadPulseOrange 2s ease-in-out infinite;
+       }
+
        @keyframes downloadPulse {
            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); transform: scale(1); }
            50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); transform: scale(1.05); }
+       }
+
+       @keyframes downloadPulseOrange {
+           0%, 100% { box-shadow: 0 0 20px rgba(255, 102, 0, 0.5); transform: scale(1); }
+           50% { box-shadow: 0 0 40px rgba(255, 102, 0, 0.8); transform: scale(1.05); }
        }
 
        .download-arrow {
@@ -624,6 +696,10 @@
            border-right: 15px solid transparent;
            border-top: 25px solid var(--neon-cyan);
            animation: arrowBounce 1s ease-in-out infinite;
+       }
+
+       .download-icon.orange .download-arrow {
+           border-top-color: var(--neon-orange);
        }
 
        @keyframes arrowBounce {
@@ -668,6 +744,117 @@
            box-shadow: 0 10px 40px rgba(176, 38, 255, 0.6);
        }
 
+       .download-btn-final.orange-btn {
+           background: linear-gradient(45deg, var(--neon-orange), #ff8533);
+           box-shadow: 0 0 30px rgba(255, 102, 0, 0.4);
+       }
+
+       .download-btn-final.orange-btn:hover {
+           box-shadow: 0 10px 40px rgba(255, 102, 0, 0.6);
+       }
+
+       /* V2 Version Screen */
+       .v2-version-screen {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100vw;
+           height: 100vh;
+           background: rgba(10, 10, 15, 0.98);
+           backdrop-filter: blur(20px);
+           z-index: 102;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           padding: 20px;
+           opacity: 0;
+           pointer-events: none;
+           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+       .v2-version-screen.active {
+           opacity: 1;
+           pointer-events: all;
+       }
+
+       .v2-version-content {
+           max-width: 600px;
+           width: 100%;
+           text-align: center;
+           transform: scale(0.9);
+           transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+       .v2-version-screen.active .v2-version-content {
+           transform: scale(1);
+       }
+
+       .v2-version-title {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.8rem;
+           margin-bottom: 10px;
+           color: var(--neon-orange);
+           text-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+       }
+
+       .v2-version-subtitle {
+           color: rgba(255, 255, 255, 0.6);
+           margin-bottom: 30px;
+           font-size: 1.1rem;
+       }
+
+       .v2-download-btn {
+           position: relative;
+           padding: 25px 30px;
+           background: rgba(255, 255, 255, 0.03);
+           border: 2px solid var(--neon-orange);
+           border-radius: 15px;
+           cursor: pointer;
+           transition: all 0.4s ease;
+           text-align: center;
+           overflow: hidden;
+           width: 100%;
+           max-width: 400px;
+           margin: 0 auto;
+       }
+
+       .v2-download-btn::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: linear-gradient(90deg, rgba(255, 102, 0, 0.2), transparent);
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+
+       .v2-download-btn:hover::before {
+           opacity: 1;
+       }
+
+       .v2-download-btn:hover {
+           transform: translateY(-5px);
+           border-color: #ff8533;
+           box-shadow: 0 0 40px rgba(255, 102, 0, 0.4);
+       }
+
+       .v2-btn-label {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.3rem;
+           font-weight: 700;
+           color: #fff;
+           display: block;
+           margin-bottom: 5px;
+       }
+
+       .v2-btn-desc {
+           font-size: 0.9rem;
+           color: rgba(255, 255, 255, 0.6);
+       }
+
        /* Responsive */
        @media (max-width: 768px) {
            .brand-name { font-size: 2.8rem; letter-spacing: 4px; }
@@ -677,10 +864,11 @@
            .help-wrapper { top: 15px; right: 15px; }
            .help-btn { width: 40px; height: 40px; font-size: 1.2rem; }
            .info-content { padding: 20px; }
-           .info-title { font-size: 1.2rem; }
+           .info-title { font-size: 1.2rem; padding-right: 45px; }
+           .info-close { width: 32px; height: 32px; font-size: 1.2rem; top: 12px; right: 12px; }
+           .v2-version-title { font-size: 1.4rem; }
        }
 
-       /* Скрываем скроллбар но оставляем функциональность */
        .info-content::-webkit-scrollbar {
            width: 8px;
        }
@@ -695,7 +883,6 @@
            border-radius: 4px;
        }
 
-       /* Loading animation for buttons */
        .loading {
            position: relative;
            pointer-events: none;
@@ -737,7 +924,7 @@
    <!-- Info Modal -->
    <div class="info-modal" id="infoModal">
        <div class="info-content">
-           <button class="info-close" onclick="hideInfoModal()">×</button>
+           <button class="info-close" onclick="hideInfoModal()" aria-label="Закрыть">×</button>
            <h3 class="info-title">Информация об обновлении</h3>
            <ul class="info-list">
                <li><strong>Обновлено:</strong> 09.02.2026</li>
@@ -747,11 +934,25 @@
                <li>Исправлен загрузчик чита</li>
                <li>Улучшена система безопасности (Anti-ban)</li>
            </ul>
+           
            <div class="info-version-box">
                <div class="info-version-title">Информация о версиях:</div>
                <div class="info-version-text">
                    <strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) и выше через Jetpack библиотеку. Это современная версия. <span style="color: var(--neon-green);">(Рекомендуется)</span>
                </div>
+           </div>
+           
+           <div class="info-version-box v2-box">
+               <div class="info-version-title">V2 (Устаревшая)</div>
+               <div class="info-version-text">
+                   <strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) до Android 10 (API 29). Устарела. (Если у вас старая версия Android)
+               </div>
+           </div>
+           
+           <div class="v2-download-section">
+               <div class="v2-download-title">Не работает версия V3?</div>
+               <div class="v2-download-title">Возможно у вас старая версия Android, можете попробовать скачать Версию V2</div>
+               <a class="v2-download-link" onclick="showV2Screen()">СКАЧАТЬ</a>
            </div>
        </div>
    </div>
@@ -782,7 +983,7 @@
            <p class="version-subtitle">Версия для слабых устройств</p>
            
            <div class="version-buttons">
-               <button class="version-btn v3" onclick="startDownload()">
+               <button class="version-btn v3" onclick="startDownloadV3()">
                    <span class="version-label">Скачать V3 Версию</span>
                    <span class="version-desc">Рекомендуется • Современная • Android 4.0+</span>
                </button>
@@ -792,15 +993,42 @@
        </div>
    </div>
 
-   <!-- Download Screen -->
-   <div class="download-screen" id="downloadScreen">
+   <!-- V2 Version Screen -->
+   <div class="v2-version-screen" id="v2VersionScreen">
+       <div class="v2-version-content">
+           <h2 class="v2-version-title">Версия для старых версий Android</h2>
+           <p class="v2-version-subtitle">Выберите версию для загрузки</p>
+           
+           <button class="v2-download-btn" onclick="startDownloadV2()">
+               <span class="v2-btn-label">Скачать V2 Версию</span>
+               <span class="v2-btn-desc">Устаревшая • Android 3.0 - 10</span>
+           </button>
+
+           <button class="back-btn" onclick="hideV2Screen()" style="margin-top: 30px;">← Назад</button>
+       </div>
+   </div>
+
+   <!-- Download Screen V3 -->
+   <div class="download-screen" id="downloadScreenV3">
        <div class="download-content">
            <div class="download-icon">
                <div class="download-arrow"></div>
            </div>
            <h2 class="download-title">Начинаем скачивание...</h2>
            <p class="download-text">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
-           <a href="https://github.com/ZoloCheatOffical/Zolo-modz/raw/main/Pubg%20ZoloCheat-GL-4.2-V5%20(Last%20D).apk" class="download-btn-final" id="finalDownloadBtn" download="Pubg ZoloCheat-GL-4.2-V5 (Last D).apk">Скачать файл</a>
+           <a href="https://github.com/ZoloCheatOffical/Zolo-modz/raw/main/Pubg%20ZoloCheat-GL-4.2-V5%20(Last%20D).apk" class="download-btn-final" id="finalDownloadBtnV3" download="Pubg ZoloCheat-GL-4.2-V5 (Last D).apk">Скачать файл</a>
+       </div>
+   </div>
+
+   <!-- Download Screen V2 -->
+   <div class="download-screen" id="downloadScreenV2">
+       <div class="download-content">
+           <div class="download-icon orange">
+               <div class="download-arrow"></div>
+           </div>
+           <h2 class="download-title">Начинаем скачивание V2...</h2>
+           <p class="download-text">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
+           <a href="https://github.com/ZoloCheatOffical/Zolo-modz/raw/main/Pubg%20ZoloCheat-GL-4.2-V5%20(V2).apk" class="download-btn-final orange-btn" id="finalDownloadBtnV2" download="Pubg ZoloCheat-GL-4.2-V5 (V2).apk">Скачать файл V2</a>
        </div>
    </div>
 
@@ -824,12 +1052,21 @@
 
        // Show info modal
        function showInfoModal() {
-           document.getElementById('infoModal').classList.add('active');
+           const modal = document.getElementById('infoModal');
+           modal.style.display = 'flex';
+           void modal.offsetWidth;
+           modal.classList.add('active');
+           document.body.style.overflow = 'hidden';
        }
 
        // Hide info modal
        function hideInfoModal() {
-           document.getElementById('infoModal').classList.remove('active');
+           const modal = document.getElementById('infoModal');
+           modal.classList.remove('active');
+           setTimeout(() => {
+               modal.style.display = 'none';
+               document.body.style.overflow = '';
+           }, 300);
        }
 
        // Show version selection screen
@@ -842,25 +1079,53 @@
            document.getElementById('versionScreen').classList.remove('active');
        }
 
-       // Start download process
-       function startDownload() {
-           const downloadScreen = document.getElementById('downloadScreen');
-           
-           // Hide version screen and show download screen
+       // Show V2 screen
+       function showV2Screen() {
+           hideInfoModal();
+           setTimeout(() => {
+               document.getElementById('v2VersionScreen').classList.add('active');
+           }, 300);
+       }
+
+       // Hide V2 screen
+       function hideV2Screen() {
+           document.getElementById('v2VersionScreen').classList.remove('active');
+       }
+
+       // Start download V3
+       function startDownloadV3() {
+           const downloadScreen = document.getElementById('downloadScreenV3');
            document.getElementById('versionScreen').classList.remove('active');
            
            setTimeout(() => {
                downloadScreen.classList.add('active');
-               
-               // Auto start download
                setTimeout(() => {
-                   document.getElementById('finalDownloadBtn').click();
+                   document.getElementById('finalDownloadBtnV3').click();
                }, 1000);
            }, 300);
        }
 
-       // Close download screen when clicking outside
-       document.getElementById('downloadScreen').addEventListener('click', function(e) {
+       // Start download V2
+       function startDownloadV2() {
+           const downloadScreen = document.getElementById('downloadScreenV2');
+           document.getElementById('v2VersionScreen').classList.remove('active');
+           
+           setTimeout(() => {
+               downloadScreen.classList.add('active');
+               setTimeout(() => {
+                   document.getElementById('finalDownloadBtnV2').click();
+               }, 1000);
+           }, 300);
+       }
+
+       // Close download screens when clicking outside
+       document.getElementById('downloadScreenV3').addEventListener('click', function(e) {
+           if (e.target === this) {
+               this.classList.remove('active');
+           }
+       });
+
+       document.getElementById('downloadScreenV2').addEventListener('click', function(e) {
            if (e.target === this) {
                this.classList.remove('active');
            }
@@ -873,12 +1138,21 @@
            }
        });
 
+       // Close V2 screen when clicking outside
+       document.getElementById('v2VersionScreen').addEventListener('click', function(e) {
+           if (e.target === this) {
+               this.classList.remove('active');
+           }
+       });
+
        // Close on Escape key
        document.addEventListener('keydown', function(e) {
            if (e.key === 'Escape') {
                hideInfoModal();
                document.getElementById('versionScreen').classList.remove('active');
-               document.getElementById('downloadScreen').classList.remove('active');
+               document.getElementById('v2VersionScreen').classList.remove('active');
+               document.getElementById('downloadScreenV3').classList.remove('active');
+               document.getElementById('downloadScreenV2').classList.remove('active');
            }
        });
 
@@ -890,7 +1164,6 @@
            btn.addEventListener('click', function(e) {
                if (this.classList.contains('loading')) return;
                
-               // Add ripple effect
                const ripple = document.createElement('span');
                ripple.style.cssText = `
                    position: absolute;
