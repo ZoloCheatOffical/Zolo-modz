@@ -103,7 +103,7 @@
            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
        }
 
-       /* Floating Particles - Falling from top to bottom */
+       /* Floating Particles */
        .particles {
            position: fixed;
            top: 0;
@@ -141,6 +141,190 @@
                transform: translateY(110vh) translateX(50px) scale(0);
                opacity: 0;
            }
+       }
+
+       /* Language Switcher */
+       .lang-wrapper {
+           position: fixed;
+           top: 20px;
+           left: 20px;
+           z-index: 50;
+       }
+
+       .lang-btn {
+           display: flex;
+           align-items: center;
+           gap: 8px;
+           padding: 10px 15px;
+           background: rgba(176, 38, 255, 0.1);
+           border: 2px solid var(--neon-purple);
+           border-radius: 25px;
+           color: #fff;
+           font-family: 'Orbitron', sans-serif;
+           font-size: 0.9rem;
+           font-weight: 700;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+       }
+
+       .lang-btn:hover {
+           background: rgba(176, 38, 255, 0.2);
+           box-shadow: 0 0 30px rgba(176, 38, 255, 0.5);
+           transform: translateY(-2px);
+       }
+
+       .lang-flag {
+           width: 24px;
+           height: 16px;
+           border-radius: 3px;
+           object-fit: cover;
+           box-shadow: 0 0 10px rgba(255,255,255,0.3);
+       }
+
+       .lang-arrow {
+           transition: transform 0.3s ease;
+           font-size: 0.7rem;
+       }
+
+       .lang-btn.active .lang-arrow {
+           transform: rotate(180deg);
+       }
+
+       .lang-dropdown {
+           position: absolute;
+           top: calc(100% + 10px);
+           left: 0;
+           background: rgba(20, 10, 30, 0.95);
+           border: 2px solid var(--neon-purple);
+           border-radius: 15px;
+           padding: 10px;
+           min-width: 180px;
+           opacity: 0;
+           visibility: hidden;
+           transform: translateY(-10px) scale(0.95);
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(176, 38, 255, 0.2);
+           backdrop-filter: blur(10px);
+       }
+
+       .lang-dropdown.active {
+           opacity: 1;
+           visibility: visible;
+           transform: translateY(0) scale(1);
+       }
+
+       .lang-option {
+           display: flex;
+           align-items: center;
+           gap: 10px;
+           padding: 12px;
+           border-radius: 10px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           margin-bottom: 5px;
+       }
+
+       .lang-option:last-child {
+           margin-bottom: 0;
+       }
+
+       .lang-option:hover {
+           background: rgba(176, 38, 255, 0.2);
+           transform: translateX(5px);
+       }
+
+       .lang-option.selected {
+           background: rgba(176, 38, 255, 0.3);
+           border: 1px solid var(--neon-purple);
+       }
+
+       .lang-option-text {
+           font-family: 'Rajdhani', sans-serif;
+           font-weight: 600;
+           font-size: 0.95rem;
+       }
+
+       /* Language Loading Screen */
+       .lang-loading-screen {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100vw;
+           height: 100vh;
+           background: rgba(10, 10, 15, 0.98);
+           backdrop-filter: blur(20px);
+           z-index: 200;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           opacity: 0;
+           pointer-events: none;
+           transition: opacity 0.5s ease;
+       }
+
+       .lang-loading-screen.active {
+           opacity: 1;
+           pointer-events: all;
+       }
+
+       .lang-loading-content {
+           text-align: center;
+           max-width: 400px;
+           padding: 20px;
+       }
+
+       .lang-loading-text {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.8rem;
+           color: var(--neon-cyan);
+           margin-bottom: 30px;
+           text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+           animation: loadingPulse 1.5s ease-in-out infinite;
+       }
+
+       @keyframes loadingPulse {
+           0%, 100% { opacity: 0.5; }
+           50% { opacity: 1; }
+       }
+
+       .lang-loading-bar-container {
+           width: 100%;
+           height: 6px;
+           background: rgba(255, 255, 255, 0.1);
+           border-radius: 3px;
+           overflow: hidden;
+           position: relative;
+           box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+       }
+
+       .lang-loading-bar {
+           height: 100%;
+           background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan), var(--neon-purple));
+           background-size: 200% 100%;
+           width: 0%;
+           border-radius: 3px;
+           animation: loadingBar 2s ease-in-out forwards, loadingShine 2s linear infinite;
+           box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+       }
+
+       @keyframes loadingBar {
+           0% { width: 0%; }
+           100% { width: 100%; }
+       }
+
+       @keyframes loadingShine {
+           0% { background-position: 200% 0; }
+           100% { background-position: -200% 0; }
+       }
+
+       .lang-loading-percent {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1rem;
+           color: var(--neon-cyan);
+           margin-top: 15px;
+           opacity: 0.8;
        }
 
        /* Main Container */
@@ -501,19 +685,18 @@
            background: rgba(10, 10, 15, 0.98);
            backdrop-filter: blur(20px);
            z-index: 100;
-           display: flex;
+           display: none;
            flex-direction: column;
            align-items: center;
            justify-content: center;
            padding: 20px;
            opacity: 0;
-           pointer-events: none;
            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
        }
 
        .version-screen.active {
+           display: flex;
            opacity: 1;
-           pointer-events: all;
        }
 
        .version-content {
@@ -642,19 +825,18 @@
            background: rgba(10, 10, 15, 0.98);
            backdrop-filter: blur(20px);
            z-index: 101;
-           display: flex;
+           display: none;
            flex-direction: column;
            align-items: center;
            justify-content: center;
            padding: 20px;
            opacity: 0;
-           pointer-events: none;
            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
        }
 
        .download-screen.active {
+           display: flex;
            opacity: 1;
-           pointer-events: all;
        }
 
        .download-content {
@@ -763,19 +945,18 @@
            background: rgba(10, 10, 15, 0.98);
            backdrop-filter: blur(20px);
            z-index: 102;
-           display: flex;
+           display: none;
            flex-direction: column;
            align-items: center;
            justify-content: center;
            padding: 20px;
            opacity: 0;
-           pointer-events: none;
            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
        }
 
        .v2-version-screen.active {
+           display: flex;
            opacity: 1;
-           pointer-events: all;
        }
 
        .v2-version-content {
@@ -867,6 +1048,11 @@
            .info-title { font-size: 1.2rem; padding-right: 45px; }
            .info-close { width: 32px; height: 32px; font-size: 1.2rem; top: 12px; right: 12px; }
            .v2-version-title { font-size: 1.4rem; }
+           
+           .lang-wrapper { top: 15px; left: 15px; }
+           .lang-btn { padding: 8px 12px; font-size: 0.8rem; }
+           .lang-flag { width: 20px; height: 14px; }
+           .lang-loading-text { font-size: 1.4rem; }
        }
 
        .info-content::-webkit-scrollbar {
@@ -916,17 +1102,59 @@
    </div>
    <div class="particles" id="particles"></div>
 
+   <!-- Language Switcher -->
+   <div class="lang-wrapper">
+       <button class="lang-btn" id="langBtn">
+           <img src="https://flagcdn.com/w40/ru.png" alt="RU" class="lang-flag" id="currentFlag">
+           <span id="currentLang">RU</span>
+           <span class="lang-arrow">▼</span>
+       </button>
+       <div class="lang-dropdown" id="langDropdown">
+           <div class="lang-option selected" data-lang="ru">
+               <img src="https://flagcdn.com/w40/ru.png" alt="RU" class="lang-flag">
+               <span class="lang-option-text">Русский</span>
+           </div>
+           <div class="lang-option" data-lang="en">
+               <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="lang-flag">
+               <span class="lang-option-text">English</span>
+           </div>
+           <div class="lang-option" data-lang="ara">
+               <img src="https://flagcdn.com/w40/sa.png" alt="ARA" class="lang-flag">
+               <span class="lang-option-text">العربية</span>
+           </div>
+           <div class="lang-option" data-lang="zh">
+               <img src="https://flagcdn.com/w40/cn.png" alt="ZH" class="lang-flag">
+               <span class="lang-option-text">中文</span>
+           </div>
+           <div class="lang-option" data-lang="es">
+               <img src="https://flagcdn.com/w40/es.png" alt="ES" class="lang-flag">
+               <span class="lang-option-text">Español</span>
+           </div>
+       </div>
+   </div>
+
+   <!-- Language Loading Screen -->
+   <div class="lang-loading-screen" id="langLoadingScreen">
+       <div class="lang-loading-content">
+           <div class="lang-loading-text" id="loadingText">Подождите...</div>
+           <div class="lang-loading-bar-container">
+               <div class="lang-loading-bar"></div>
+           </div>
+           <div class="lang-loading-percent" id="loadingPercent">0%</div>
+       </div>
+   </div>
+
    <!-- Help Button Wrapper -->
    <div class="help-wrapper">
-       <button class="help-btn" onclick="showInfoModal()">?</button>
+       <button class="help-btn" id="helpBtn">?</button>
    </div>
 
    <!-- Info Modal -->
    <div class="info-modal" id="infoModal">
        <div class="info-content">
-           <button class="info-close" onclick="hideInfoModal()" aria-label="Закрыть">×</button>
-           <h3 class="info-title">Информация об обновлении</h3>
-           <ul class="info-list">
+           <button class="info-close" id="infoClose" aria-label="Закрыть">×</button>
+           <h3 class="info-title" id="infoTitle">Информация об обновлении</h3>
+           <ul class="info-list" id="infoList">
                <li><strong>Обновлено:</strong> 09.02.2026</li>
                <li><strong>Актуальность:</strong> Active</li>
                <li>Исправлены ошибки сервера</li>
@@ -936,23 +1164,23 @@
            </ul>
            
            <div class="info-version-box">
-               <div class="info-version-title">Информация о версиях:</div>
-               <div class="info-version-text">
+               <div class="info-version-title" id="v3Title">Информация о версиях:</div>
+               <div class="info-version-text" id="v3Text">
                    <strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) и выше через Jetpack библиотеку. Это современная версия. <span style="color: var(--neon-green);">(Рекомендуется)</span>
                </div>
            </div>
            
            <div class="info-version-box v2-box">
-               <div class="info-version-title">V2 (Устаревшая)</div>
-               <div class="info-version-text">
-                   <strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) до Android 10 (API 29). Устарела. (Если у вас старая версия Android)
+               <div class="info-version-title" id="v2Title">V2 (Устаревшая)</div>
+               <div class="info-version-text" id="v2Text">
+                   <strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) до Android 10 (API 29). Устарела. (Если у вас старая версия Android) <span style="color: var(--neon-orange);">(Устаревшая)</span>
                </div>
            </div>
            
            <div class="v2-download-section">
-               <div class="v2-download-title">Не работает версия V3?</div>
-               <div class="v2-download-title">Возможно у вас старая версия Android, можете попробовать скачать Версию V2</div>
-               <a class="v2-download-link" onclick="showV2Screen()">СКАЧАТЬ</a>
+               <div class="v2-download-title" id="v2DownloadTitle1">Не работает версия V3?</div>
+               <div class="v2-download-title" id="v2DownloadTitle2">Возможно у вас старая версия Android, можете попробовать скачать Версию V2</div>
+               <a class="v2-download-link" id="v2DownloadLink">СКАЧАТЬ</a>
            </div>
        </div>
    </div>
@@ -962,15 +1190,15 @@
        <!-- Logo Text Only -->
        <div class="logo-section">
            <h1 class="brand-name">ZOLO MODZ</h1>
-           <p class="tagline">Premium PUBG Mobile Modifications</p>
+           <p class="tagline" id="tagline">Premium PUBG Mobile Modifications</p>
        </div>
 
        <!-- Buttons -->
        <div class="buttons-section">
-           <a href="https://t.me/zolothebestmodz" target="_blank" class="neon-button telegram-btn">
+           <a href="https://t.me/zolothebestmodz" target="_blank" class="neon-button telegram-btn" id="telegramBtn">
                Перейти в Telegram канал
            </a>
-           <button class="neon-button trial-btn" onclick="showVersionScreen()">
+           <button class="neon-button trial-btn" id="trialBtn">
                Попробовать пробную версию на 30 дней
            </button>
        </div>
@@ -979,32 +1207,32 @@
    <!-- Version Selection Screen -->
    <div class="version-screen" id="versionScreen">
        <div class="version-content">
-           <h2 class="version-title">Выберите версию</h2>
-           <p class="version-subtitle">Версия для слабых устройств</p>
+           <h2 class="version-title" id="versionTitle">Выберите версию</h2>
+           <p class="version-subtitle" id="versionSubtitle">Версия для слабых устройств</p>
            
            <div class="version-buttons">
-               <button class="version-btn v3" onclick="startDownloadV3()">
-                   <span class="version-label">Скачать V3 Версию</span>
-                   <span class="version-desc">Рекомендуется • Современная • Android 4.0+</span>
+               <button class="version-btn v3" id="v3Btn">
+                   <span class="version-label" id="v3BtnLabel">Скачать V3 Версию</span>
+                   <span class="version-desc" id="v3BtnDesc">Рекомендуется • Современная • Android 4.0+</span>
                </button>
            </div>
 
-           <button class="back-btn" onclick="hideVersionScreen()">← Назад</button>
+           <button class="back-btn" id="versionBackBtn">← Назад</button>
        </div>
    </div>
 
    <!-- V2 Version Screen -->
    <div class="v2-version-screen" id="v2VersionScreen">
        <div class="v2-version-content">
-           <h2 class="v2-version-title">Версия для старых версий Android</h2>
-           <p class="v2-version-subtitle">Выберите версию для загрузки</p>
+           <h2 class="v2-version-title" id="v2ScreenTitle">Версия для старых версий Android</h2>
+           <p class="v2-version-subtitle" id="v2ScreenSubtitle">Выберите версию для загрузки</p>
            
-           <button class="v2-download-btn" onclick="startDownloadV2()">
-               <span class="v2-btn-label">Скачать V2 Версию</span>
-               <span class="v2-btn-desc">Устаревшая • Android 3.0 - 10</span>
+           <button class="v2-download-btn" id="v2DownloadBtn">
+               <span class="v2-btn-label" id="v2BtnLabel">Скачать V2 Версию</span>
+               <span class="v2-btn-desc" id="v2BtnDesc">Устаревшая • Android 3.0 - 10</span>
            </button>
 
-           <button class="back-btn" onclick="hideV2Screen()" style="margin-top: 30px;">← Назад</button>
+           <button class="back-btn" id="v2BackBtn" style="margin-top: 30px;">← Назад</button>
        </div>
    </div>
 
@@ -1014,8 +1242,8 @@
            <div class="download-icon">
                <div class="download-arrow"></div>
            </div>
-           <h2 class="download-title">Начинаем скачивание...</h2>
-           <p class="download-text">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
+           <h2 class="download-title" id="downloadTitleV3">Начинаем скачивание...</h2>
+           <p class="download-text" id="downloadTextV3">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
            <a href="https://github.com/ZoloCheatOffical/Zolo-modz/raw/main/Pubg%20ZoloCheat-GL-4.2-V5%20(Last%20D).apk" class="download-btn-final" id="finalDownloadBtnV3" download="Pubg ZoloCheat-GL-4.2-V5 (Last D).apk">Скачать файл</a>
        </div>
    </div>
@@ -1026,14 +1254,213 @@
            <div class="download-icon orange">
                <div class="download-arrow"></div>
            </div>
-           <h2 class="download-title">Начинаем скачивание V2...</h2>
-           <p class="download-text">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
+           <h2 class="download-title" id="downloadTitleV2">Начинаем скачивание V2...</h2>
+           <p class="download-text" id="downloadTextV2">Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже</p>
            <a href="https://github.com/ZoloCheatOffical/Zolo-modz/raw/main/Pubg%20ZoloCheat-GL-4.2-V5%20(V2).apk" class="download-btn-final orange-btn" id="finalDownloadBtnV2" download="Pubg ZoloCheat-GL-4.2-V5 (V2).apk">Скачать файл V2</a>
        </div>
    </div>
 
    <script>
-       // Create falling particles (top to bottom)
+       // Translations
+       const translations = {
+           ru: {
+               loadingText: "Подождите...",
+               infoTitle: "Информация об обновлении",
+               infoList: [
+                   "<strong>Обновлено:</strong> 09.02.2026",
+                   "<strong>Актуальность:</strong> Active",
+                   "Исправлены ошибки сервера",
+                   "Теперь на сайт можно заходить без VPN",
+                   "Исправлен загрузчик чита",
+                   "Улучшена система безопасности (Anti-ban)"
+               ],
+               v3Title: "Информация о версиях:",
+               v3Text: "<strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) и выше через Jetpack библиотеку. Это современная версия. <span style='color: var(--neon-green);'>(Рекомендуется)</span>",
+               v2Title: "V2 (Устаревшая)",
+               v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) до Android 10 (API 29). Устарела. (Если у вас старая версия Android) <span style='color: var(--neon-orange);'>(Устаревшая)</span>",
+               v2DownloadTitle1: "Не работает версия V3?",
+               v2DownloadTitle2: "Возможно у вас старая версия Android, можете попробовать скачать Версию V2",
+               tagline: "Premium PUBG Mobile Modifications",
+               telegramBtn: "Перейти в Telegram канал",
+               trialBtn: "Попробовать пробную версию на 30 дней",
+               versionTitle: "Выберите версию",
+               versionSubtitle: "Версия для слабых устройств",
+               v3BtnLabel: "Скачать V3 Версию",
+               v3BtnDesc: "Рекомендуется • Современная • Android 4.0+",
+               backBtn: "← Назад",
+               v2ScreenTitle: "Версия для старых версий Android",
+               v2ScreenSubtitle: "Выберите версию для загрузки",
+               v2BtnLabel: "Скачать V2 Версию",
+               v2BtnDesc: "Устаревшая • Android 3.0 - 10",
+               v2BackBtn: "← Назад",
+               downloadTitleV3: "Начинаем скачивание...",
+               downloadTextV3: "Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже",
+               downloadBtnV3: "Скачать файл",
+               downloadTitleV2: "Начинаем скачивание V2...",
+               downloadTextV2: "Если загрузка автоматически не начнётся,<br>нажмите кнопку ниже",
+               downloadBtnV2: "Скачать файл V2"
+           },
+           en: {
+               loadingText: "Please wait...",
+               infoTitle: "Update Information",
+               infoList: [
+                   "<strong>Updated:</strong> 09.02.2026",
+                   "<strong>Status:</strong> Active",
+                   "Fixed server errors",
+                   "No VPN required anymore",
+                   "Fixed cheat loader",
+                   "Improved security system (Anti-ban)"
+               ],
+               v3Title: "Version Information:",
+               v3Text: "<strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) and above via Jetpack library. This is the modern version. <span style='color: var(--neon-green);'>(Recommended)</span>",
+               v2Title: "V2 (Legacy)",
+               v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) to Android 10 (API 29). Legacy version. (If you have an old Android version) <span style='color: var(--neon-orange);'>(Legacy)</span>",
+               v2DownloadTitle1: "V3 version not working?",
+               v2DownloadTitle2: "You may have an old Android version, try downloading V2 Version",
+               tagline: "Premium PUBG Mobile Modifications",
+               telegramBtn: "Go to Telegram Channel",
+               trialBtn: "Try trial version for 30 days",
+               versionTitle: "Select Version",
+               versionSubtitle: "Version for weak devices",
+               v3BtnLabel: "Download V3 Version",
+               v3BtnDesc: "Recommended • Modern • Android 4.0+",
+               backBtn: "← Back",
+               v2ScreenTitle: "Version for old Android versions",
+               v2ScreenSubtitle: "Select version to download",
+               v2BtnLabel: "Download V2 Version",
+               v2BtnDesc: "Legacy • Android 3.0 - 10",
+               v2BackBtn: "← Back",
+               downloadTitleV3: "Starting download...",
+               downloadTextV3: "If download doesn't start automatically,<br>click the button below",
+               downloadBtnV3: "Download file",
+               downloadTitleV2: "Starting V2 download...",
+               downloadTextV2: "If download doesn't start automatically,<br>click the button below",
+               downloadBtnV2: "Download V2 file"
+           },
+           ara: {
+               loadingText: "يرجى الانتظار...",
+               infoTitle: "معلومات التحديث",
+               infoList: [
+                   "<strong>تم التحديث:</strong> 09.02.2026",
+                   "<strong>الحالة:</strong> نشط",
+                   "تم إصلاح أخطاء الخادم",
+                   "لا يتطلب VPN بعد الآن",
+                   "تم إصلاح محمل الغش",
+                   "تحسين نظام الأمان (مكافح الحظر)"
+               ],
+               v3Title: "معلومات الإصدار:",
+               v3Text: "<strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) وأعلى عبر مكتبة Jetpack. هذا هو الإصدار الحديث. <span style='color: var(--neon-green);'>(موصى به)</span>",
+               v2Title: "V2 (قديم)",
+               v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) إلى Android 10 (API 29). إصدار قديم. (إذا كان لديك إصدار Android قديم) <span style='color: var(--neon-orange);'>(قديم)</span>",
+               v2DownloadTitle1: "الإصدار V3 لا يعمل؟",
+               v2DownloadTitle2: "ربما لديك إصدار Android قديم، جرب تحميل الإصدار V2",
+               tagline: "تعديلات PUBG Mobile المتميزة",
+               telegramBtn: "الانتقال إلى قناة Telegram",
+               trialBtn: "جرب النسخة التجريبية لمدة 30 يومًا",
+               versionTitle: "اختر الإصدار",
+               versionSubtitle: "إصدار للأجهزة الضعيفة",
+               v3BtnLabel: "تحميل الإصدار V3",
+               v3BtnDesc: "موصى به • حديث • Android 4.0+",
+               backBtn: "← رجوع",
+               v2ScreenTitle: "إصدار لإصدارات Android القديمة",
+               v2ScreenSubtitle: "اختر الإصدار للتحميل",
+               v2BtnLabel: "تحميل الإصدار V2",
+               v2BtnDesc: "قديم • Android 3.0 - 10",
+               v2BackBtn: "← رجوع",
+               downloadTitleV3: "جاري بدء التحميل...",
+               downloadTextV3: "إذا لم يبدأ التحميل تلقائيًا،<br>اضغط الزر أدناه",
+               downloadBtnV3: "تحميل الملف",
+               downloadTitleV2: "جاري بدء تحميل V2...",
+               downloadTextV2: "إذا لم يبدأ التحميل تلقائيًا،<br>اضغط الزر أدناه",
+               downloadBtnV2: "تحميل ملف V2"
+           },
+           zh: {
+               loadingText: "请稍候...",
+               infoTitle: "更新信息",
+               infoList: [
+                   "<strong>更新日期：</strong> 2026年2月9日",
+                   "<strong>状态：</strong> 活跃",
+                   "修复了服务器错误",
+                   "不再需要VPN",
+                   "修复了作弊加载器",
+                   "改进了安全系统（防封）"
+               ],
+               v3Title: "版本信息：",
+               v3Text: "<strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) 及以上版本，通过 Jetpack 库。这是现代版本。<span style='color: var(--neon-green);'>（推荐）</span>",
+               v2Title: "V2（旧版）",
+               v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) 到 Android 10 (API 29)。旧版本。（如果您的 Android 版本较旧）<span style='color: var(--neon-orange);'>（旧版）</span>",
+               v2DownloadTitle1: "V3 版本无法运行？",
+               v2DownloadTitle2: "您可能使用的是旧版 Android，请尝试下载 V2 版本",
+               tagline: "高级 PUBG Mobile 修改",
+               telegramBtn: "前往 Telegram 频道",
+               trialBtn: "试用30天",
+               versionTitle: "选择版本",
+               versionSubtitle: "低配设备版本",
+               v3BtnLabel: "下载 V3 版本",
+               v3BtnDesc: "推荐 • 现代 • Android 4.0+",
+               backBtn: "← 返回",
+               v2ScreenTitle: "旧版 Android 版本",
+               v2ScreenSubtitle: "选择要下载的版本",
+               v2BtnLabel: "下载 V2 版本",
+               v2BtnDesc: "旧版 • Android 3.0 - 10",
+               v2BackBtn: "← 返回",
+               downloadTitleV3: "开始下载...",
+               downloadTextV3: "如果下载没有自动开始，<br>请点击下方按钮",
+               downloadBtnV3: "下载文件",
+               downloadTitleV2: "开始下载 V2...",
+               downloadTextV2: "如果下载没有自动开始，<br>请点击下方按钮",
+               downloadBtnV2: "下载 V2 文件"
+           },
+           es: {
+               loadingText: "Por favor espere...",
+               infoTitle: "Información de actualización",
+               infoList: [
+                   "<strong>Actualizado:</strong> 09.02.2026",
+                   "<strong>Estado:</strong> Activo",
+                   "Errores del servidor corregidos",
+                   "Ya no se requiere VPN",
+                   "Cargador de trucos corregido",
+                   "Sistema de seguridad mejorado (Anti-ban)"
+               ],
+               v3Title: "Información de versiones:",
+               v3Text: "<strong>V3</strong> (androidx.fragment.app.Fragment) — Android 4.0 (API 14+) y superior mediante la biblioteca Jetpack. Esta es la versión moderna. <span style='color: var(--neon-green);'>(Recomendado)</span>",
+               v2Title: "V2 (Obsoleto)",
+               v2Text: "<strong>V2</strong> (android.app.Fragment) — Android 3.0 (Honeycomb, API 11) hasta Android 10 (API 29). Versión obsoleta. (Si tienes una versión antigua de Android) <span style='color: var(--neon-orange);'>(Obsoleto)</span>",
+               v2DownloadTitle1: "¿La versión V3 no funciona?",
+               v2DownloadTitle2: "Es posible que tengas una versión antigua de Android, prueba descargar la Versión V2",
+               tagline: "Modificaciones Premium de PUBG Mobile",
+               telegramBtn: "Ir al canal de Telegram",
+               trialBtn: "Probar versión de prueba por 30 días",
+               versionTitle: "Seleccionar versión",
+               versionSubtitle: "Versión para dispositivos débiles",
+               v3BtnLabel: "Descargar versión V3",
+               v3BtnDesc: "Recomendado • Moderno • Android 4.0+",
+               backBtn: "← Atrás",
+               v2ScreenTitle: "Versión para versiones antiguas de Android",
+               v2ScreenSubtitle: "Selecciona la versión para descargar",
+               v2BtnLabel: "Descargar versión V2",
+               v2BtnDesc: "Obsoleto • Android 3.0 - 10",
+               v2BackBtn: "← Atrás",
+               downloadTitleV3: "Iniciando descarga...",
+               downloadTextV3: "Si la descarga no comienza automáticamente,<br>haz clic en el botón de abajo",
+               downloadBtnV3: "Descargar archivo",
+               downloadTitleV2: "Iniciando descarga V2...",
+               downloadTextV2: "Si la descarga no comienza automáticamente,<br>haz clic en el botón de abajo",
+               downloadBtnV2: "Descargar archivo V2"
+           }
+       };
+
+       const flagCodes = {
+           ru: 'ru',
+           en: 'gb',
+           ara: 'sa',
+           zh: 'cn',
+           es: 'es'
+       };
+
+       let currentLang = 'ru';
+
+       // Create falling particles
        function createParticles() {
            const container = document.getElementById('particles');
            const colors = ['#00ffff', '#ff00ff', '#39ff14', '#b026ff'];
@@ -1047,6 +1474,126 @@
                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
                container.appendChild(particle);
+           }
+       }
+
+       // Toggle language dropdown
+       function toggleLangDropdown() {
+           const dropdown = document.getElementById('langDropdown');
+           const btn = document.getElementById('langBtn');
+           dropdown.classList.toggle('active');
+           btn.classList.toggle('active');
+       }
+
+       // Close dropdown when clicking outside
+       document.addEventListener('click', function(e) {
+           const wrapper = document.querySelector('.lang-wrapper');
+           if (!wrapper.contains(e.target)) {
+               document.getElementById('langDropdown').classList.remove('active');
+               document.getElementById('langBtn').classList.remove('active');
+           }
+       });
+
+       // Change language
+       function changeLanguage(lang) {
+           if (lang === currentLang) {
+               toggleLangDropdown();
+               return;
+           }
+
+           currentLang = lang;
+           const t = translations[lang];
+           
+           // Show loading screen
+           const loadingScreen = document.getElementById('langLoadingScreen');
+           const loadingText = document.getElementById('loadingText');
+           const loadingPercent = document.getElementById('loadingPercent');
+           
+           loadingText.textContent = t.loadingText;
+           loadingScreen.classList.add('active');
+           toggleLangDropdown();
+
+           // Animate percentage
+           let percent = 0;
+           const interval = setInterval(() => {
+               percent += Math.random() * 15;
+               if (percent >= 100) {
+                   percent = 100;
+                   clearInterval(interval);
+                   setTimeout(() => {
+                       applyLanguage(lang);
+                       loadingScreen.classList.remove('active');
+                       loadingPercent.textContent = '0%';
+                   }, 500);
+               }
+               loadingPercent.textContent = Math.floor(percent) + '%';
+           }, 200);
+       }
+
+       // Apply language to UI
+       function applyLanguage(lang) {
+           const t = translations[lang];
+           const flagCode = flagCodes[lang];
+           
+           // Update language button
+           document.getElementById('currentLang').textContent = lang.toUpperCase();
+           document.getElementById('currentFlag').src = `https://flagcdn.com/w40/${flagCode}.png`;
+           
+           // Update dropdown selection
+           document.querySelectorAll('.lang-option').forEach(opt => {
+               opt.classList.remove('selected');
+               if (opt.dataset.lang === lang) {
+                   opt.classList.add('selected');
+               }
+           });
+
+           // Update info modal
+           document.getElementById('infoTitle').textContent = t.infoTitle;
+           const infoList = document.getElementById('infoList');
+           infoList.innerHTML = t.infoList.map(item => `<li>${item}</li>`).join('');
+           document.getElementById('v3Title').textContent = t.v3Title;
+           document.getElementById('v3Text').innerHTML = t.v3Text;
+           document.getElementById('v2Title').textContent = t.v2Title;
+           document.getElementById('v2Text').innerHTML = t.v2Text;
+           document.getElementById('v2DownloadTitle1').textContent = t.v2DownloadTitle1;
+           document.getElementById('v2DownloadTitle2').textContent = t.v2DownloadTitle2;
+
+           // Update main page
+           document.getElementById('tagline').textContent = t.tagline;
+           document.getElementById('telegramBtn').textContent = t.telegramBtn;
+           document.getElementById('trialBtn').textContent = t.trialBtn;
+
+           // Update version screen
+           document.getElementById('versionTitle').textContent = t.versionTitle;
+           document.getElementById('versionSubtitle').textContent = t.versionSubtitle;
+           document.getElementById('v3BtnLabel').textContent = t.v3BtnLabel;
+           document.getElementById('v3BtnDesc').textContent = t.v3BtnDesc;
+           document.getElementById('versionBackBtn').textContent = t.backBtn;
+
+           // Update V2 screen
+           document.getElementById('v2ScreenTitle').textContent = t.v2ScreenTitle;
+           document.getElementById('v2ScreenSubtitle').textContent = t.v2ScreenSubtitle;
+           document.getElementById('v2BtnLabel').textContent = t.v2BtnLabel;
+           document.getElementById('v2BtnDesc').textContent = t.v2BtnDesc;
+           document.getElementById('v2BackBtn').textContent = t.v2BackBtn;
+
+           // Update download screens
+           document.getElementById('downloadTitleV3').textContent = t.downloadTitleV3;
+           document.getElementById('downloadTextV3').innerHTML = t.downloadTextV3;
+           document.getElementById('finalDownloadBtnV3').textContent = t.downloadBtnV3;
+           
+           document.getElementById('downloadTitleV2').textContent = t.downloadTitleV2;
+           document.getElementById('downloadTextV2').innerHTML = t.downloadTextV2;
+           document.getElementById('finalDownloadBtnV2').textContent = t.downloadBtnV2;
+
+           // Update HTML lang attribute
+           document.documentElement.lang = lang === 'ara' ? 'ar' : lang === 'zh' ? 'zh' : lang === 'es' ? 'es' : lang === 'ru' ? 'ru' : 'en';
+           
+           // Update text direction for Arabic
+           if (lang === 'ara') {
+               document.body.style.direction = 'rtl';
+           } else {
+               document.body.style.direction = 'ltr';
            }
        }
 
@@ -1118,66 +1665,116 @@
            }, 300);
        }
 
-       // Close download screens when clicking outside
-       document.getElementById('downloadScreenV3').addEventListener('click', function(e) {
-           if (e.target === this) {
-               this.classList.remove('active');
-           }
-       });
+       // Event Listeners
+       document.addEventListener('DOMContentLoaded', function() {
+           // Language button
+           document.getElementById('langBtn').addEventListener('click', function(e) {
+               e.stopPropagation();
+               toggleLangDropdown();
+           });
 
-       document.getElementById('downloadScreenV2').addEventListener('click', function(e) {
-           if (e.target === this) {
-               this.classList.remove('active');
-           }
-       });
+           // Language options
+           document.querySelectorAll('.lang-option').forEach(option => {
+               option.addEventListener('click', function(e) {
+                   e.stopPropagation();
+                   const lang = this.dataset.lang;
+                   changeLanguage(lang);
+               });
+           });
 
-       // Close info modal when clicking outside
-       document.getElementById('infoModal').addEventListener('click', function(e) {
-           if (e.target === this) {
-               hideInfoModal();
-           }
-       });
+           // Help button
+           document.getElementById('helpBtn').addEventListener('click', showInfoModal);
 
-       // Close V2 screen when clicking outside
-       document.getElementById('v2VersionScreen').addEventListener('click', function(e) {
-           if (e.target === this) {
-               this.classList.remove('active');
-           }
-       });
+           // Info modal close
+           document.getElementById('infoClose').addEventListener('click', hideInfoModal);
 
-       // Close on Escape key
-       document.addEventListener('keydown', function(e) {
-           if (e.key === 'Escape') {
-               hideInfoModal();
-               document.getElementById('versionScreen').classList.remove('active');
-               document.getElementById('v2VersionScreen').classList.remove('active');
-               document.getElementById('downloadScreenV3').classList.remove('active');
-               document.getElementById('downloadScreenV2').classList.remove('active');
-           }
-       });
+           // V2 download link in info modal
+           document.getElementById('v2DownloadLink').addEventListener('click', function(e) {
+               e.preventDefault();
+               showV2Screen();
+           });
 
-       // Initialize
-       createParticles();
+           // Trial button
+           document.getElementById('trialBtn').addEventListener('click', showVersionScreen);
 
-       // Add smooth transitions for all buttons
-       document.querySelectorAll('button, a').forEach(btn => {
-           btn.addEventListener('click', function(e) {
-               if (this.classList.contains('loading')) return;
-               
-               const ripple = document.createElement('span');
-               ripple.style.cssText = `
-                   position: absolute;
-                   background: rgba(255,255,255,0.3);
-                   border-radius: 50%;
-                   transform: scale(0);
-                   animation: ripple 0.6s linear;
-                   pointer-events: none;
-               `;
-               this.style.position = 'relative';
-               this.style.overflow = 'hidden';
-               this.appendChild(ripple);
-               
-               setTimeout(() => ripple.remove(), 600);
+           // Version screen back button
+           document.getElementById('versionBackBtn').addEventListener('click', hideVersionScreen);
+
+           // V3 download button
+           document.getElementById('v3Btn').addEventListener('click', startDownloadV3);
+
+           // V2 screen back button
+           document.getElementById('v2BackBtn').addEventListener('click', hideV2Screen);
+
+           // V2 download button
+           document.getElementById('v2DownloadBtn').addEventListener('click', startDownloadV2);
+
+           // Close modals when clicking outside
+           document.getElementById('infoModal').addEventListener('click', function(e) {
+               if (e.target === this) hideInfoModal();
+           });
+
+           document.getElementById('versionScreen').addEventListener('click', function(e) {
+               if (e.target === this) hideVersionScreen();
+           });
+
+           document.getElementById('v2VersionScreen').addEventListener('click', function(e) {
+               if (e.target === this) hideV2Screen();
+           });
+
+           document.getElementById('downloadScreenV3').addEventListener('click', function(e) {
+               if (e.target === this) this.classList.remove('active');
+           });
+
+           document.getElementById('downloadScreenV2').addEventListener('click', function(e) {
+               if (e.target === this) this.classList.remove('active');
+           });
+
+           // Escape key
+           document.addEventListener('keydown', function(e) {
+               if (e.key === 'Escape') {
+                   hideInfoModal();
+                   document.getElementById('versionScreen').classList.remove('active');
+                   document.getElementById('v2VersionScreen').classList.remove('active');
+                   document.getElementById('downloadScreenV3').classList.remove('active');
+                   document.getElementById('downloadScreenV2').classList.remove('active');
+                   document.getElementById('langLoadingScreen').classList.remove('active');
+               }
+           });
+
+           // Initialize particles
+           createParticles();
+
+           // Add ripple effect to buttons
+           document.querySelectorAll('button, a').forEach(btn => {
+               btn.addEventListener('click', function(e) {
+                   if (this.classList.contains('loading')) return;
+                   
+                   const rect = this.getBoundingClientRect();
+                   const x = e.clientX - rect.left;
+                   const y = e.clientY - rect.top;
+                   
+                   const ripple = document.createElement('span');
+                   ripple.style.cssText = `
+                       position: absolute;
+                       background: rgba(255,255,255,0.3);
+                       border-radius: 50%;
+                       transform: scale(0);
+                       animation: ripple 0.6s linear;
+                       pointer-events: none;
+                       left: ${x}px;
+                       top: ${y}px;
+                       width: 20px;
+                       height: 20px;
+                       margin-left: -10px;
+                       margin-top: -10px;
+                   `;
+                   this.style.position = 'relative';
+                   this.style.overflow = 'hidden';
+                   this.appendChild(ripple);
+                   
+                   setTimeout(() => ripple.remove(), 600);
+               });
            });
        });
 
