@@ -505,7 +505,7 @@
            font-size: 1.2rem;
        }
 
-       /* Video Modal - Shorts format 9:16 */
+       /* Video Modal - 16:9 для обычного видео */
        .video-modal {
            position: fixed;
            top: 0;
@@ -533,7 +533,7 @@
            border: 2px solid var(--neon-orange);
            border-radius: 20px;
            padding: 20px;
-           max-width: 450px;
+           max-width: 900px;
            width: 100%;
            max-height: 90vh;
            position: relative;
@@ -583,7 +583,7 @@
 
        .video-container {
            position: relative;
-           padding-bottom: 177.77%; /* 9:16 aspect ratio for shorts */
+           padding-bottom: 56.25%; /* 16:9 aspect ratio */
            height: 0;
            overflow: hidden;
            border-radius: 15px;
@@ -1187,7 +1187,6 @@
            .lang-loading-text { font-size: 1.4rem; }
            
            .video-content { 
-               max-width: 350px; 
                padding: 15px;
            }
            .video-title { font-size: 1rem; }
@@ -1197,7 +1196,6 @@
        @media (max-width: 480px) {
            .video-content {
                max-width: 95vw;
-               max-height: 80vh;
            }
        }
 
@@ -1296,14 +1294,10 @@
            <button class="video-close" id="videoClose">×</button>
            <h3 class="video-title" id="videoTitle">📹 ГАЙД: Как установить</h3>
            <div class="video-container">
-               <!-- RUTUBE SHORTS - приватное видео -->
-               <iframe src="https://rutube.ru/play/embed/07e8dc89abfac902c36e3a5f186c676f?p=JoV75Frl99cKPrk18QbMow" 
-                       allowfullscreen 
-                       frameborder="0"
-                       allow="clipboard-write; autoplay; encrypted-media; picture-in-picture; web-share"
-                       webkitAllowFullScreen 
-                       mozallowfullscreen
-                       referrerpolicy="no-referrer-when-downgrade">
+               <!-- GOOGLE DRIVE VIDEO -->
+               <iframe src="https://drive.google.com/file/d/1YoTyCeK_TuDSfdtNGynE2LfO-DNmbeZW/preview" 
+                       allow="autoplay; encrypted-media" 
+                       allowfullscreen>
                </iframe>
            </div>
        </div>
